@@ -44,7 +44,9 @@ export default function HomePage() {
           <div className="feature-desc">Instant video consultation with specialists</div>
         </Link>
         <Link to="/ai-chatbot" className="feature-card">
-          <div className="feature-img feature-img3"><FaRobot size={32} color="#4a90e2"/></div>
+          <div className="feature-img">
+            <FaRobot size={36} color="#ffffff" />
+          </div>
           <div className="feature-title">AI Chatbot</div>
           <div className="feature-desc">Get instant answers to your health queries</div>
         </Link>
