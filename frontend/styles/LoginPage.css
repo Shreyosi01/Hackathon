@@ -1,0 +1,113 @@
+/* LoginPage.css */
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fbff 0%, #eaf3fa 100%);
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-icon {
+  background: #e3f0ff;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.login-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.login-label {
+  font-size: 0.98rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.login-input, .login-select {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.login-input:focus, .login-select:focus {
+  border: 1.5px solid #2563eb;
+}
+
+.login-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.1rem;
+  color: #374151;
+  cursor: pointer;
+}
+
+.login-btn {
+  width: 100%;
+  background: #2563eb;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 0;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login-btn:hover {
+  background: #1d4ed8;
+}
+
+.login-footer {
+  margin-top: 1.2rem;
+  font-size: 0.98rem;
+  color: #6b7280;
+  text-align: center;
+}

@@ -1,0 +1,80 @@
+.login-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eaf3fa 0%, #c9e7f2 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.caresync-logo {
+  width: 90px;
+  margin-bottom: 1rem;
+}
+.login-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a3c5a;
+  margin-bottom: 0.2rem;
+}
+.login-subtitle {
+  color: #4a90e2;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.login-form label {
+  font-size: 0.95rem;
+  color: #1a3c5a;
+  font-weight: 500;
+}
+.login-form input, .login-form select {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #c9e7f2;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  background: #f7fbfd;
+}
+.sign-in-btn {
+  margin-top: 1rem;
+  background: linear-gradient(90deg, #1a3c5a 0%, #4a90e2 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sign-in-btn:hover {
+  background: linear-gradient(90deg, #4a90e2 0%, #1a3c5a 100%);
+}
+.login-footer {
+  margin-top: 1.5rem;
+  color: #4a90e2;
+  font-size: 0.95rem;
+  text-align: center;
+}
+.login-caresync {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #1a3c5a;
+  font-weight: 700;
+  letter-spacing: 2px;
+}

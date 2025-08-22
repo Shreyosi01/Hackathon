@@ -1,0 +1,16 @@
+.main-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.2rem 2vw 0.5rem 2vw;
+  background: transparent;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.header-title {
+  font-weight: 700;
+  font-size: 22px;
+  color: #1e88a8;
+  margin-left: 8px;
+}

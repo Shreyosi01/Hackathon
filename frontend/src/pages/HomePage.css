@@ -1,0 +1,206 @@
+.homepage-root {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #caf0ef,   #caf0ef); /* teal gradient background */
+  min-height: 100vh;
+}
+
+/* ----- HEADER ----- */
+.homepage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 3vw 1.2rem 2vw;
+  background: #00695c; /* dark teal header */
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.logo {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #fff; /* white logo text */
+  letter-spacing: 1px;
+}
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+}
+.nav-links a {
+  color: #e0f2f1; /* light teal text */
+  text-decoration: none;
+  font-size: 1.08rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover {
+  color: #b2dfdb;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.login-btn {
+  background: #fff;
+  color: #00695c;
+  border: 1.5px solid #00695c;
+  border-radius: 7px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.login-btn:hover {
+  background: #00695c;
+  color: #fff;
+}
+
+/* ----- SEARCH BAR ----- */
+.search-bar-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2.5rem 0 2.2rem 0;
+}
+.location-select {
+  padding: 0.7rem 1.2rem;
+  border: 1.2px solid #80cbc4;
+  border-radius: 8px 0 0 8px;
+  font-size: 1rem;
+  background: #fff;
+  outline: none;
+}
+.search-input {
+  padding: 0.7rem 1.2rem;
+  border: 1.2px solid #80cbc4;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  font-size: 1rem;
+  width: 350px;
+  background: #fff;
+  outline: none;
+}
+
+/* ----- FEATURE CARDS ----- */
+.feature-cards-row {
+  display: flex;
+  justify-content: center;
+  gap: 2.2rem;
+  margin: 2.5rem 0 2.5rem 0;
+  flex-wrap: wrap;
+}
+.feature-card {
+  background: #00897b; /* medium teal */
+  border-radius: 22px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  width: 260px;
+  min-height: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem 1.2rem 1.5rem 1.2rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+  color: #fff; /* white text */
+}
+.feature-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  transform: translateY(-4px) scale(1.03);
+}
+.feature-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  margin-bottom: 1.1rem;
+}
+.feature-img1 { background: #26a69a; }
+.feature-img2 { background: #4db6ac; }
+.feature-img3 { background: #00796b; }
+.feature-img4 { background: #00695c; }
+.feature-img5 { background: #004d40; }
+.feature-title {
+  font-size: 1.13rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+.feature-desc {
+  font-size: 1rem;
+  color: #e0f2f1; /* lighter teal text */
+  text-align: center;
+}
+
+/* ----- BOTTOM SECTION ----- */
+.homepage-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+.homepage-tagline {
+  font-size: 1.3rem;
+  color: #004d40; /* dark teal */
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.homepage-subtag {
+  font-size: 1rem;
+  color: #00796b;
+  margin-top: 0.2rem;
+}
+.view-all-btn {
+  margin-top: 1.2rem;
+  background: #fff;
+  color: #00695c;
+  border: 1.5px solid #00695c;
+  border-radius: 7px;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.view-all-btn:hover {
+  background: #00695c;
+  color: #fff;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 900px) {
+  .feature-cards-row {
+    gap: 1.2rem;
+  }
+  .feature-card {
+    width: 210px;
+    min-height: 220px;
+  }
+  .search-input {
+    width: 200px;
+  }
+}
+@media (max-width: 600px) {
+  .homepage-header {
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1rem 2vw;
+  }
+  .feature-cards-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .feature-card {
+    width: 90vw;
+    min-width: 0;
+    padding: 1rem 0.7rem 1.2rem 0.7rem;
+  }
+  .search-bar-row {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .search-input {
+    width: 90vw;
+  }
+}

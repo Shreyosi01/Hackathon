@@ -1,0 +1,143 @@
+/* LoginPracto.css */
+.practo-login-container {
+  min-height: 100vh;
+  background: #fafbfc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.practo-login-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 3rem auto;
+}
+
+.practo-login-illustration {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.practo-illustration-img {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+}
+
+.practo-login-card {
+  flex: 1 1 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(30,136,168,0.08);
+  padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+  min-width: 340px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.practo-login-tabs {
+  display: flex;
+  gap: 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 2.2rem;
+  color: #6b7280;
+}
+.practo-login-tabs .active {
+  color: #1e88a8;
+  border-bottom: 2.5px solid #1e88a8;
+  padding-bottom: 0.2rem;
+}
+
+.practo-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.practo-login-label {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #1e88a8;
+  margin-bottom: 0.2rem;
+  text-align: left;
+}
+
+.practo-login-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1.2px solid #b6d6e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background: #fafdff;
+  transition: border 0.2s;
+}
+.practo-login-input:focus {
+  border: 1.5px solid #1e88a8;
+}
+
+.practo-login-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  font-size: 0.98rem;
+  color: #6b7280;
+}
+
+.practo-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.98rem;
+  cursor: pointer;
+}
+
+.practo-forgot {
+  color: #1e88a8;
+  text-decoration: none;
+  font-size: 0.98rem;
+  font-weight: 500;
+  transition: text-decoration 0.2s;
+}
+.practo-forgot:hover {
+  text-decoration: underline;
+}
+
+.practo-login-btn {
+  width: 100%;
+  background: #1ec9f4;
+  color: #fff;
+  font-size: 1.13rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.85rem 0;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(30,136,168,0.08);
+  transition: background 0.2s;
+}
+.practo-login-btn:hover {
+  background: #0bb3e6;
+}
+
+@media (max-width: 900px) {
+  .practo-login-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .practo-login-illustration {
+    justify-content: center;
+  }
+}

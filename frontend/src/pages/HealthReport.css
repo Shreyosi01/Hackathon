@@ -1,0 +1,87 @@
+.health-report-root {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #f7fbfd;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.08);
+  padding: 2rem;
+}
+.subtitle {
+  color: #4a90e2;
+  margin-bottom: 1.5rem;
+}
+.health-report-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(44,62,80,0.04);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.emergency-banner {
+  background: #ffeaea;
+  color: #e74c3c;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.label {
+  font-weight: 500;
+  color: #1a3c5a;
+}
+.input {
+  width: 100%;
+  min-height: 70px;
+  border: 1px solid #c9e7f2;
+  border-radius: 6px;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background: #f7fbfd;
+}
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #eaf3fa;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+}
+.checkbox-label {
+  color: #1a3c5a;
+  font-weight: 500;
+}
+.location-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.location-btn {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.location-info {
+  color: #4a90e2;
+  font-size: 0.95rem;
+}
+.photo-upload {
+  margin-top: 1rem;
+}
+.photo-box {
+  border: 1.5px dashed #c9e7f2;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  color: #b0b0b0;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  background: #f7fbfd;
+}

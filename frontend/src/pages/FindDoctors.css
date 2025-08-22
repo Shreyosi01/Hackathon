@@ -1,0 +1,42 @@
+.find-doctors-root {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.08);
+  padding: 2rem;
+}
+.location-btn {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.error-msg {
+  color: #e74c3c;
+  margin-bottom: 1rem;
+}
+.search-bar {
+  display: flex;
+  margin: 1.5rem 0;
+}
+.search-bar input {
+  flex: 1;
+  padding: 0.7rem;
+  border: 1px solid #c9e7f2;
+  border-radius: 6px 0 0 6px;
+  font-size: 1rem;
+}
+.search-bar button {
+  background: #1a3c5a;
+  color: #fff;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
