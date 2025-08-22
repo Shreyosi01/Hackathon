@@ -14,6 +14,21 @@ export default function FindDoctors() {
     googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
   });
 
+    // Example: Fetch doctors from backend
+    React.useEffect(() => {
+      async function fetchDoctors() {
+        try {
+          const res = await fetch('/api/doctors');
+          const data = await res.json();
+          console.log('Doctors:', data);
+          // setDoctors(data); // Uncomment if you add doctors state
+        } catch (err) {
+          console.error('Error fetching doctors:', err);
+        }
+      }
+      fetchDoctors();
+    }, []);
+
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(

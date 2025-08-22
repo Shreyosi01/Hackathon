@@ -1,0 +1,117 @@
+.signup-container {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-center-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  padding: 0;
+}
+
+/* Card styling */
+.signup-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.95);
+  padding: 2.8rem 2.5rem 2.2rem 2.5rem;
+  min-width: 340px;
+  max-width: 410px;
+  width: 95vw;
+  backdrop-filter: blur(2px);
+  border: 1.5px solid #e3eafc;
+}
+
+/* Title + subtitle */
+.signup-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+
+.signup-subtitle {
+  font-size: 1.15rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Form */
+.signup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  align-items: center;
+}
+
+/* Inputs */
+.signup-input, .signup-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.2px solid #b6d6e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background: #fafdff;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.signup-input:focus, .signup-select:focus {
+  border: 1.5px solid #1e88a8;
+  box-shadow: 0 0 0 2px #e0eafc;
+}
+
+/* Button */
+.signup-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #1e88a8 60%, #43c6ac 100%);
+  color: #fff;
+  font-size: 1.13rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 0;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(30,136,168,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.signup-btn:hover {
+  background: linear-gradient(90deg, #1976a5 60%, #43c6ac 100%);
+  box-shadow: 0 4px 16px rgba(30,136,168,0.13);
+}
+
+/* Footer switch */
+.signup-footer {
+  margin-top: 1.2rem;
+  font-size: 1.01rem;
+  color: #4b5563;
+  text-align: center;
+  letter-spacing: 0.1px;
+}
+
+.signup-footer a {
+  color: #1e88a8;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.signup-footer a:hover {
+  text-decoration: underline;
+}
