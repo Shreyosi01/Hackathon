@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import "../components/Header.css";
 import axios from "axios";
 import "./LoginPage.css";
+import { useNavigate } from "react-router-dom";
 
 const languages = [
   { code: "EN", label: "English" },
@@ -41,10 +42,14 @@ export default function LoginPage() {
   const [password, setPassword] = React.useState("");
   const [lang, setLang] = React.useState("EN");
   const [loading, setLoading] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [isError, setIsError] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setMessage("");
 
     try {
       const res = await axios.post("http://127.0.0.1:8000/login", {
@@ -52,13 +57,19 @@ export default function LoginPage() {
         password,
       });
 
-      alert(`✅ Login successful! Welcome ${res.data.access_token}`);
-      console.log("Login response:", res.data);
-
+      // Save token
       localStorage.setItem("token", res.data.access_token);
+
+      // Show success message
+      setIsError(false);
+      setMessage("✅ Login successful! Redirecting...");
+
+      // Redirect to dashboard after 1.5 sec
+      setTimeout(() => navigate("/"), 1500);
     } catch (err) {
       console.error("Login error:", err);
-      alert("❌ Login failed. Please check your details.");
+      setIsError(true);
+      setMessage("❌ Login failed. Please check your details.");
     } finally {
       setLoading(false);
     }
@@ -71,58 +82,30 @@ export default function LoginPage() {
         <div className="login-card login-centered-card">
           {/* Logo + Title + Subtitle */}
           <div className="login-demo-top">
-            <div className="login-demo-heart">
-              <svg
-                width="64"
-                height="64"
-                viewBox="0 0 72 72"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="36" cy="36" r="36" fill="#EAF3FA" />
-                <path
-                  d="M36 51C35.7 51 35.4 50.9 35.2 50.7L24.2 39.7C21.1 36.6 21.1 31.4 24.2 28.3C25.7 26.8 27.7 26 29.8 26C31.9 26 33.9 26.8 35.4 28.3L36 28.9L36.6 28.3C39.7 25.2 44.9 25.2 48 28.3C51.1 31.4 51.1 36.6 48 39.7L36.8 50.7C36.6 50.9 36.3 51 36 51Z"
-                  stroke="#4A90E2"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="#fff"
-                />
-              </svg>
-            </div>
             <div className="login-demo-title">{text[lang].title}</div>
             <div className="login-demo-subtitle">{text[lang].subtitle}</div>
           </div>
 
-          {/* Language Selector Right Aligned */}
+          {/* Language Selector */}
           <div className="login-lang-row">
-            <div className="login-lang" title="Change Language">
-              <span role="img" aria-label="globe">
-                🌐
-              </span>
-              <select
-                className="lang-select small"
-                value={lang}
-                onChange={(e) => setLang(e.target.value)}
-                aria-label="Select Language"
-              >
-                {languages.map((l) => (
-                  <option key={l.code} value={l.code}>
-                    {l.code}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <select
+              className="lang-select small"
+              value={lang}
+              onChange={(e) => setLang(e.target.value)}
+            >
+              {languages.map((l) => (
+                <option key={l.code} value={l.code}>
+                  {l.code}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Form */}
           <form className="login-form" onSubmit={handleSubmit}>
-            <label className="login-label" htmlFor="identifier">
-              {text[lang].email}
-            </label>
+            <label className="login-label">{text[lang].email}</label>
             <input
               className="login-input"
-              id="identifier"
               type="text"
               placeholder={text[lang].emailPlaceholder}
               value={identifier}
@@ -130,12 +113,9 @@ export default function LoginPage() {
               required
             />
 
-            <label className="login-label" htmlFor="password">
-              {text[lang].password}
-            </label>
+            <label className="login-label">{text[lang].password}</label>
             <input
               className="login-input"
-              id="password"
               type="password"
               placeholder={text[lang].passwordPlaceholder}
               value={password}
@@ -152,15 +132,23 @@ export default function LoginPage() {
             </button>
           </form>
 
+          {/* Success/Error message */}
+          {message && (
+            <p
+              className={`login-message ${
+                isError ? "error-message" : "success-message"
+              }`}
+            >
+              {message}
+            </p>
+          )}
+
           {/* Signup + Footer */}
           <div className="switch-auth">
-            {text[lang].signupPrompt}{" "}
-            <a href="/signup">{text[lang].signup}</a>
+            {text[lang].signupPrompt} <a href="/signup">{text[lang].signup}</a>
           </div>
 
-          <div className="login-footer login-demo-footer">
-            {text[lang].footer}
-          </div>
+          <div className="login-footer">{text[lang].footer}</div>
         </div>
       </div>
     </div>

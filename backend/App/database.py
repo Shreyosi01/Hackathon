@@ -1,16 +1,26 @@
-from sqlalchemy import engine, create_engine
-# from sqlalchemy.ext.declarative_base import declarative_base
-from sqlalchemy.orm import sessionmaker,declarative_base
 import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-SQLALCHEMY_DATABASE_URL = r"sqlite:///C:/Users/srijani/projects/Hackathon/backend/product.db"
-engine = create_engine(SQLALCHEMY_DATABASE_URL,connect_args={
-    "check_same_thread": False
-})
-import os
-print("Using DB file at:", os.path.abspath("product.db"))
-SessionLocal = sessionmaker(bind = engine , autocommit = False, autoflush = False)
+# ✅ Use environment variable or fallback to default SQLite
+DB_URL = os.getenv(
+    "DATABASE_URL",
+    r"sqlite:///C:/Users/srijani/projects/Hackathon/backend/product.db"
+)
+
+# ✅ For SQLite we need "check_same_thread"
+connect_args = {"check_same_thread": False} if DB_URL.startswith("sqlite") else {}
+
+engine = create_engine(DB_URL, connect_args=connect_args)
+
+# ✅ Print which DB is being used (debugging)
+print("📦 Using DB file at:", os.path.abspath(DB_URL.replace("sqlite:///", "")))
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 Base = declarative_base()
+
+# Dependency for FastAPI routes
 def get_db():
     db = SessionLocal()
     try:
