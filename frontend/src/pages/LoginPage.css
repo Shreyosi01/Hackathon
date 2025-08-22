@@ -1,80 +1,142 @@
-.login-bg {
+/* Container */
+.login-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #eaf3fa 0%, #c9e7f2 100%);
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-center-wrapper {
+  flex: 1;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
 }
+
+/* Card */
 .login-card {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
-  padding: 2.5rem 2rem 2rem 2rem;
-  width: 350px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2rem;
+  width: 100%;
+  max-width: 520px;   /* slightly wider */
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.caresync-logo {
-  width: 90px;
-  margin-bottom: 1rem;
-}
-.login-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1a3c5a;
-  margin-bottom: 0.2rem;
-}
-.login-subtitle {
-  color: #4a90e2;
-  font-size: 1rem;
+
+/* Logo + Title */
+.login-demo-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 1.5rem;
 }
-.login-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+
+.login-demo-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #006d77;
+  margin-top: 0.8rem;
 }
-.login-form label {
-  font-size: 0.95rem;
-  color: #1a3c5a;
-  font-weight: 500;
-}
-.login-form input, .login-form select {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #c9e7f2;
-  border-radius: 6px;
+
+.login-demo-subtitle {
   font-size: 1rem;
-  outline: none;
-  background: #f7fbfd;
+  color: #6b7280;
+  margin-top: 0.3rem;
 }
-.sign-in-btn {
-  margin-top: 1rem;
-  background: linear-gradient(90deg, #1a3c5a 0%, #4a90e2 100%);
+
+/* Language Selector Right */
+.login-lang-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.login-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #1e88a8;
+  font-size: 1rem;
+}
+
+.lang-select.small {
+  width: 70px;
+  padding: 0.35rem 0.5rem;
+  border: 1.2px solid #b2ebf2;
+  border-radius: 6px;
+  background: #f9fdfd;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Labels FULL LEFT */
+.login-label {
+  width: 100%;
+  display: block;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+  padding-left: 0.2rem;  /* aligns with input text */
+}
+
+/* Inputs */
+.login-input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid #b2ebf2;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #f9fdfd;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.login-input:focus {
+  border: 1.5px solid #0097a7;
+  box-shadow: 0 0 6px rgba(0, 151, 167, 0.25);
+  outline: none;
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  padding: 0.9rem 0;
+  background: linear-gradient(90deg, #0097a7, #00bfa5);
   color: #fff;
+  font-size: 1.1rem;
   font-weight: 600;
   border: none;
-  border-radius: 6px;
-  padding: 0.7rem 0;
-  font-size: 1.1rem;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.2s;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
 }
-.sign-in-btn:hover {
-  background: linear-gradient(90deg, #4a90e2 0%, #1a3c5a 100%);
+
+.login-btn:hover {
+  background: linear-gradient(90deg, #007f91, #00997d);
+  box-shadow: 0 4px 14px rgba(0, 151, 167, 0.3);
 }
+
+/* Footer */
 .login-footer {
-  margin-top: 1.5rem;
-  color: #4a90e2;
+  margin-top: 1.2rem;
   font-size: 0.95rem;
+  color: #4b5563;
   text-align: center;
-}
-.login-caresync {
-  margin-top: 2rem;
-  font-size: 1.2rem;
-  color: #1a3c5a;
-  font-weight: 700;
-  letter-spacing: 2px;
 }
