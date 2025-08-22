@@ -1,12 +1,22 @@
+import React, { useEffect, useState } from "react";
 import StudentProfile from "./Student";
 import DoctorProfile from "./Doctor";
+import { fetchMyProfile } from "../../services/auth";
 
 export default function Profile() {
-  const role = localStorage.getItem("role");
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (role === "doctor") {
-    return <DoctorProfile user={{ name: "Dr. John Doe", email: "doctor@example.com" }} />;
-  }
+  useEffect(() => {
+    fetchMyProfile().then((data) => {
+      setProfile(data);
+      setLoading(false);
+    });
+  }, []);
 
-  return <StudentProfile user={{ name: "Alice Student", email: "student@example.com" }} />;
+  if (loading) return <div>Loading profile...</div>;
+  if (!profile) return <div>Failed to load profile</div>;
+
+  if (profile.role === "doctor") return <DoctorProfile user={profile} />;
+  return <StudentProfile user={profile} />;
 }

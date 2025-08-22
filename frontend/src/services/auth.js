@@ -25,3 +25,23 @@ export async function login(identifier, password) {
     localStorage.removeItem("user");
     window.location.href = "/";
   }  
+
+export async function fetchMyProfile() {
+  try {
+    const res = await fetch("http://127.0.0.1:8000/my_profile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // if using JWT
+      },
+      credentials: "include", // if using cookies
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch profile");
+
+    return await res.json();
+  } catch (err) {
+    console.error("Error fetching profile:", err);
+    return null;
+  }
+}

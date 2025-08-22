@@ -18,11 +18,29 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password : str
 
-class UserResponse(UserBase):
+def decrypt(value: str) -> str:
+    # your decryption logic here
+    return value  
+
+class UserResponse(BaseModel):
     id: int
+    full_name: str
+    email: str
+    phone: str
+    role: RoleEnum
 
     class Config:
-        from_attributes = True
+        orm_mode = True
+
+    @classmethod
+    def from_orm(cls, user: "User"):
+        return cls(
+            id=user.id,
+            full_name=user.full_name,
+            email=decrypt(user.email_encrypted),
+            phone=decrypt(user.phone_encrypted),
+            role=user.role
+        )
 
 class UserLogin(BaseModel):
     identifier : str
