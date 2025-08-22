@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "../components/Header";
 import "../components/Header.css";
-import "../styles/Signup.css"; 
+import "../styles/Signup.css";
 import api from "../api";
+import { useNavigate } from "react-router-dom";
 
 const roles = ["Student", "Doctor", "Admin"];
 
@@ -13,10 +14,14 @@ export default function SignupPage() {
   const [password, setPassword] = React.useState("");
   const [role, setRole] = React.useState("Student");
   const [loading, setLoading] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setMessage("");
+
     try {
       const res = await api.post("/register", {
         full_name: fullName,
@@ -26,13 +31,11 @@ export default function SignupPage() {
         role,
       });
 
-      alert("✅ Signup successful! You can now login.");
-      console.log("Signup response:", res.data);
-
-      window.location.href = "/login"; 
+      setMessage("✅ Signup successful! Redirecting to login...");
+      setTimeout(() => navigate("/login"), 1500);
     } catch (err) {
       console.error("Signup error:", err);
-      alert("❌ Signup failed. Try again.");
+      setMessage("❌ Signup failed. Try again.");
     } finally {
       setLoading(false);
     }
@@ -100,6 +103,8 @@ export default function SignupPage() {
               {loading ? "Creating Account..." : "Signup"}
             </button>
           </form>
+
+          {message && <p className="signup-message">{message}</p>}
 
           <div className="signup-footer">
             Already have an account? <a href="/login">Login</a>
