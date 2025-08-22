@@ -12,7 +12,7 @@ router = APIRouter()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 @router.post("/login")
-def login_user(request: schemas.UserLogin, db: Session = Depends(get_db)):
+def login(request: schemas.UserLogin, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(
         (models.User.email == encrypted_identifier) | 
         (models.User.phone == encrypted_identifier)

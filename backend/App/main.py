@@ -12,6 +12,12 @@ from fastapi.openapi.utils import get_openapi
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:3000",   # frontend dev
+    "http://127.0.0.1:3000",
+    "https://your-frontend-domain.com",  # prod
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],  # or ["*"] for testing

@@ -23,13 +23,14 @@ export default function SignupPage() {
         email,
         phone,
         password,
-        role,
+        role
       });
 
       alert("✅ Signup successful! You can now login.");
       console.log("Signup response:", res.data);
 
-      window.location.href = "/login"; 
+      window.location.href = "/login"; // redirect after signup
+
     } catch (err) {
       console.error("Signup error:", err);
       alert("❌ Signup failed. Try again.");
@@ -41,69 +42,55 @@ export default function SignupPage() {
   return (
     <div className="signup-container">
       <Header />
-      <div className="signup-center-wrapper">
-        <div className="signup-card">
-          <h2 className="signup-title">Create Account</h2>
-          <p className="signup-subtitle">Join CareSync today</p>
+      <div className="signup-card">
+        <h2>Create Account</h2>
+        <form onSubmit={handleSignup}>
+          <label>Full Name</label>
+          <input
+            type="text"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            required
+          />
 
-          <form className="signup-form" onSubmit={handleSignup}>
-            <label className="signup-label">Full Name</label>
-            <input
-              className="signup-input"
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              required
-            />
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-            <label className="signup-label">Email</label>
-            <input
-              className="signup-input"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+          <label>Phone</label>
+          <input
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
 
-            <label className="signup-label">Phone</label>
-            <input
-              className="signup-input"
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-            />
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-            <label className="signup-label">Password</label>
-            <input
-              className="signup-input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <label>Role</label>
+          <select value={role} onChange={(e) => setRole(e.target.value)}>
+            {roles.map((r) => (
+              <option key={r} value={r}>{r}</option>
+            ))}
+          </select>
 
-            <label className="signup-label">Role</label>
-            <select
-              className="signup-select"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-            >
-              {roles.map((r) => (
-                <option key={r} value={r}>
-                  {r}
-                </option>
-              ))}
-            </select>
+          <button type="submit" disabled={loading}>
+            {loading ? "Creating Account..." : "Signup"}
+          </button>
+        </form>
 
-            <button className="signup-btn" type="submit" disabled={loading}>
-              {loading ? "Creating Account..." : "Signup"}
-            </button>
-          </form>
-
-          <div className="signup-footer">
-            Already have an account? <a href="/login">Login</a>
-          </div>
+        <div className="switch-auth">
+          Already have an account? <a href="/login">Login</a>
         </div>
       </div>
     </div>
