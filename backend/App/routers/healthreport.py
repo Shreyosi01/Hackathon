@@ -10,7 +10,9 @@ from ..core.auth import get_current_user
 router = APIRouter()
 
 @router.post("/reports/create")
-def create_health_report(report: schemas.HealthReportCreate,response_model=schemas.HealthReportResponse):
+def create_health_report(report: schemas.HealthReportCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),):
     db = SessionLocal()
     new_health_report = models.HealthReports(
         is_emergency=report.is_emergency,
@@ -19,7 +21,7 @@ def create_health_report(report: schemas.HealthReportCreate,response_model=schem
         latitude=report.latitude,
         longitude=report.longitude,
         photo_url = report.photo_url,
-        reported_by=1 
+        reported_by=current_user.id
     )
     db.add(new_health_report)
     db.commit()
