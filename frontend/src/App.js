@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage.new";
 import SignupPage from "./pages/Signup";
 import FindDoctors from "./pages/FindDoctors";
-import AIChatbot from "./pages/AIChatbot";
+import ChatBot from '../src/ChatBot';
 import WellnessLeaderboard from "./pages/WellnessLeaderboard";
 import HealthReport from "./pages/HealthReport";
 import Profile from "./pages/Profile/Profile"; // ✅ added
@@ -33,7 +33,7 @@ function App() {
               </div>
             }
           />
-          <Route path="/ai-chatbot" element={<AIChatbot />} />
+          <Route path="/ai-chatbot" element={<ChatBot />} />
           <Route path="/wellness-leaderboard" element={<WellnessLeaderboard />} />
           <Route path="/health-report" element={<HealthReport />} />
           <Route path="/profile/student" element={<Profile />} />
@@ -45,4 +45,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;
