@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import './doctor.css'; // 👈 link the css file
+import './Doctor.css'; // 👈 link the css file
 
 export default function Doctor({ user }) {
   return (
