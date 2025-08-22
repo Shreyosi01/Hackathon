@@ -9,6 +9,7 @@ import WellnessLeaderboard from "./pages/WellnessLeaderboard";
 import HealthReport from "./pages/HealthReport";
 import Profile from "./pages/Profile/Profile"; // ✅ added
 import Footer from "./components/Footer";
+import VideoConsult from "./pages/VideoConsult";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/find-doctors" element={<FindDoctors />} />
+          <Route path="/video-consult" element={<VideoConsult />} />
           <Route
             path="/video-consult"
             element={
