@@ -1,9 +1,8 @@
 import React from "react";
 import Header from "../components/Header";
 import "../components/Header.css";
-import axios from "axios";
+import { login } from "../services/auth"; // service function
 
-const roles = ["Student", "Doctor", "Admin"];
 const languages = [
   { code: "EN", label: "English" },
   { code: "HI", label: "हिन्दी" },
@@ -17,7 +16,6 @@ const text = {
     emailPlaceholder: "Enter your email or phone",
     password: "Password",
     passwordPlaceholder: "Enter your password",
-    selectRole: "Select Role",
     signIn: "Sign In",
     footer: "Connecting Communities for Better Health",
     signupPrompt: "Don’t have an account?",
@@ -30,7 +28,6 @@ const text = {
     emailPlaceholder: "अपना ईमेल या फ़ोन दर्ज करें",
     password: "पासवर्ड",
     passwordPlaceholder: "अपना पासवर्ड दर्ज करें",
-    selectRole: "भूमिका चुनें",
     signIn: "साइन इन करें",
     footer: "बेहतर स्वास्थ्य के लिए समुदायों को जोड़ना",
     signupPrompt: "क्या आपका खाता नहीं है?",
@@ -41,29 +38,33 @@ const text = {
 export default function LoginPage() {
   const [identifier, setIdentifier] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [role, setRole] = React.useState(roles[0]);
   const [lang, setLang] = React.useState("EN");
   const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
+  const [success, setSuccess] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
+    setSuccess("");
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/login", {
-        identifier,
-        password,
-        role,
-      });
+      // ✅ only identifier + password
+      const token = await login(identifier, password);
+      setSuccess("✅ Login successful!");
+      console.log("JWT token:", token);
 
-      alert(`✅ Login successful! Welcome ${res.data.access_token}`);
-      console.log("Login response:", res.data);
+      // save token if needed
+      localStorage.setItem("token", token);
 
-      // Save JWT token
-      localStorage.setItem("token", res.data.access_token);
+      // redirect after short delay
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 1200);
     } catch (err) {
-      console.error("Login error:", err);
-      alert("❌ Login failed. Please check your details.");
+      console.error("Login error:", err.response?.data || err.message);
+      setError("❌ Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
     }
@@ -96,16 +97,12 @@ export default function LoginPage() {
           <div className="login-demo-title">{text[lang].title}</div>
           <div className="login-demo-subtitle">{text[lang].subtitle}</div>
         </div>
+
         <div className="login-card login-centered-card">
           <form className="login-form" onSubmit={handleSubmit}>
-            <div
-              className="login-row login-lang-row"
-              style={{ justifyContent: "flex-end" }}
-            >
+            <div className="login-row login-lang-row" style={{ justifyContent: "flex-end" }}>
               <div className="login-lang" title="Change Language">
-                <span role="img" aria-label="globe">
-                  🌐
-                </span>
+                <span role="img" aria-label="globe">🌐</span>
                 <select
                   className="lang-select"
                   value={lang}
@@ -148,40 +145,20 @@ export default function LoginPage() {
               required
             />
 
-            <label className="login-label left" htmlFor="role">
-              {text[lang].selectRole}
-            </label>
-            <select
-              className="login-select"
-              id="role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-            >
-              {roles.map((r) => (
-                <option key={r} value={r}>
-                  {r}
-                </option>
-              ))}
-            </select>
-
-            <button
-              className="login-btn login-demo-btn"
-              type="submit"
-              disabled={loading}
-            >
+            <button className="login-btn login-demo-btn" type="submit" disabled={loading}>
               {loading ? "Signing in..." : text[lang].signIn}
             </button>
           </form>
 
-          {/* signup link */}
+          {/* Inline messages */}
+          {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+          {success && <p style={{ color: "green", marginTop: "10px" }}>{success}</p>}
+
           <div className="switch-auth">
-            {text[lang].signupPrompt}{" "}
-            <a href="/signup">{text[lang].signup}</a>
+            {text[lang].signupPrompt} <a href="/signup">{text[lang].signup}</a>
           </div>
 
-          <div className="login-footer login-demo-footer">
-            {text[lang].footer}
-          </div>
+          <div className="login-footer login-demo-footer">{text[lang].footer}</div>
         </div>
       </div>
     </div>
