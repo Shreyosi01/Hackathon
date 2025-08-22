@@ -2,8 +2,8 @@ import React from "react";
 import Header from "../components/Header";
 import "../components/Header.css";
 import axios from "axios";
+import "./LoginPage.css";
 
-const roles = ["Student", "Doctor", "Admin"];
 const languages = [
   { code: "EN", label: "English" },
   { code: "HI", label: "हिन्दी" },
@@ -17,7 +17,6 @@ const text = {
     emailPlaceholder: "Enter your email or phone",
     password: "Password",
     passwordPlaceholder: "Enter your password",
-    selectRole: "Select Role",
     signIn: "Sign In",
     footer: "Connecting Communities for Better Health",
     signupPrompt: "Don’t have an account?",
@@ -30,7 +29,6 @@ const text = {
     emailPlaceholder: "अपना ईमेल या फ़ोन दर्ज करें",
     password: "पासवर्ड",
     passwordPlaceholder: "अपना पासवर्ड दर्ज करें",
-    selectRole: "भूमिका चुनें",
     signIn: "साइन इन करें",
     footer: "बेहतर स्वास्थ्य के लिए समुदायों को जोड़ना",
     signupPrompt: "क्या आपका खाता नहीं है?",
@@ -41,7 +39,6 @@ const text = {
 export default function LoginPage() {
   const [identifier, setIdentifier] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [role, setRole] = React.useState(roles[0]);
   const [lang, setLang] = React.useState("EN");
   const [loading, setLoading] = React.useState(false);
 
@@ -53,13 +50,11 @@ export default function LoginPage() {
       const res = await axios.post("http://127.0.0.1:8000/login", {
         identifier,
         password,
-        role,
       });
 
       alert(`✅ Login successful! Welcome ${res.data.access_token}`);
       console.log("Login response:", res.data);
 
-      // Save JWT token
       localStorage.setItem("token", res.data.access_token);
     } catch (err) {
       console.error("Login error:", err);
@@ -73,56 +68,56 @@ export default function LoginPage() {
     <div className="login-container">
       <Header />
       <div className="login-center-wrapper">
-        <div className="login-demo-top">
-          <div className="login-demo-heart">
-            <svg
-              width="72"
-              height="72"
-              viewBox="0 0 72 72"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="36" cy="36" r="36" fill="#EAF3FA" />
-              <path
-                d="M36 51C35.7 51 35.4 50.9 35.2 50.7L24.2 39.7C21.1 36.6 21.1 31.4 24.2 28.3C25.7 26.8 27.7 26 29.8 26C31.9 26 33.9 26.8 35.4 28.3L36 28.9L36.6 28.3C39.7 25.2 44.9 25.2 48 28.3C51.1 31.4 51.1 36.6 48 39.7L36.8 50.7C36.6 50.9 36.3 51 36 51Z"
-                stroke="#4A90E2"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="#fff"
-              />
-            </svg>
-          </div>
-          <div className="login-demo-title">{text[lang].title}</div>
-          <div className="login-demo-subtitle">{text[lang].subtitle}</div>
-        </div>
         <div className="login-card login-centered-card">
-          <form className="login-form" onSubmit={handleSubmit}>
-            <div
-              className="login-row login-lang-row"
-              style={{ justifyContent: "flex-end" }}
-            >
-              <div className="login-lang" title="Change Language">
-                <span role="img" aria-label="globe">
-                  🌐
-                </span>
-                <select
-                  className="lang-select"
-                  value={lang}
-                  onChange={(e) => setLang(e.target.value)}
-                  aria-label="Select Language"
-                  style={{ marginLeft: 4 }}
-                >
-                  {languages.map((l) => (
-                    <option key={l.code} value={l.code}>
-                      {l.code}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          {/* Logo + Title + Subtitle */}
+          <div className="login-demo-top">
+            <div className="login-demo-heart">
+              <svg
+                width="64"
+                height="64"
+                viewBox="0 0 72 72"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="36" cy="36" r="36" fill="#EAF3FA" />
+                <path
+                  d="M36 51C35.7 51 35.4 50.9 35.2 50.7L24.2 39.7C21.1 36.6 21.1 31.4 24.2 28.3C25.7 26.8 27.7 26 29.8 26C31.9 26 33.9 26.8 35.4 28.3L36 28.9L36.6 28.3C39.7 25.2 44.9 25.2 48 28.3C51.1 31.4 51.1 36.6 48 39.7L36.8 50.7C36.6 50.9 36.3 51 36 51Z"
+                  stroke="#4A90E2"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="#fff"
+                />
+              </svg>
             </div>
+            <div className="login-demo-title">{text[lang].title}</div>
+            <div className="login-demo-subtitle">{text[lang].subtitle}</div>
+          </div>
 
-            <label className="login-label left" htmlFor="identifier">
+          {/* Language Selector Right Aligned */}
+          <div className="login-lang-row">
+            <div className="login-lang" title="Change Language">
+              <span role="img" aria-label="globe">
+                🌐
+              </span>
+              <select
+                className="lang-select small"
+                value={lang}
+                onChange={(e) => setLang(e.target.value)}
+                aria-label="Select Language"
+              >
+                {languages.map((l) => (
+                  <option key={l.code} value={l.code}>
+                    {l.code}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Form */}
+          <form className="login-form" onSubmit={handleSubmit}>
+            <label className="login-label" htmlFor="identifier">
               {text[lang].email}
             </label>
             <input
@@ -135,7 +130,7 @@ export default function LoginPage() {
               required
             />
 
-            <label className="login-label left" htmlFor="password">
+            <label className="login-label" htmlFor="password">
               {text[lang].password}
             </label>
             <input
@@ -148,22 +143,6 @@ export default function LoginPage() {
               required
             />
 
-            <label className="login-label left" htmlFor="role">
-              {text[lang].selectRole}
-            </label>
-            <select
-              className="login-select"
-              id="role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-            >
-              {roles.map((r) => (
-                <option key={r} value={r}>
-                  {r}
-                </option>
-              ))}
-            </select>
-
             <button
               className="login-btn login-demo-btn"
               type="submit"
@@ -173,7 +152,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* signup link */}
+          {/* Signup + Footer */}
           <div className="switch-auth">
             {text[lang].signupPrompt}{" "}
             <a href="/signup">{text[lang].signup}</a>
