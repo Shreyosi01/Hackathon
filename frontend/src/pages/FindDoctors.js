@@ -1,33 +1,35 @@
+
 import React, { useState } from 'react';
 import './FindDoctors.css';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
 const containerStyle = {
   width: '100%',
-  height: '400px'
+  height: '400px',
+  margin: '20px 0'
 };
+
 
 export default function FindDoctors() {
   const [location, setLocation] = useState(null);
   const [error, setError] = useState('');
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
-  });
+  const [doctors, setDoctors] = useState([]);
 
-    // Example: Fetch doctors from backend
-    React.useEffect(() => {
-      async function fetchDoctors() {
-        try {
-          const res = await fetch('/api/doctors');
-          const data = await res.json();
-          console.log('Doctors:', data);
-          // setDoctors(data); // Uncomment if you add doctors state
-        } catch (err) {
-          console.error('Error fetching doctors:', err);
-        }
+  // Fetch doctors from backend
+  React.useEffect(() => {
+    async function fetchDoctors() {
+      try {
+        const res = await fetch('/api/doctors');
+        const data = await res.json();
+        setDoctors(data);
+      } catch (err) {
+        console.error('Error fetching doctors:', err);
       }
-      fetchDoctors();
-    }, []);
+    }
+    fetchDoctors();
+  }, []);
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -45,14 +47,32 @@ export default function FindDoctors() {
       <h2>Find Doctors Near You</h2>
       <button className="location-btn" onClick={getLocation}>Use My Location</button>
       {error && <div className="error-msg">{error}</div>}
-      {isLoaded && location && (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={location}
+      {location && (
+        <MapContainer
+          center={[location.lat, location.lng]}
           zoom={14}
+          style={containerStyle}
+          scrollWheelZoom={true}
         >
-          <Marker position={location} />
-        </GoogleMap>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[location.lat, location.lng]}>
+            <Popup>You are here</Popup>
+          </Marker>
+          {doctors && doctors.map((doc, idx) => (
+            doc.lat && doc.lng && (
+              <Marker key={idx} position={[doc.lat, doc.lng]}>
+                <Popup>
+                  <b>{doc.name}</b><br />
+                  {doc.specialty}<br />
+                  {doc.address}
+                </Popup>
+              </Marker>
+            )
+          ))}
+        </MapContainer>
       )}
       <div className="search-bar">
         <input placeholder="Search for doctors, specialties..." />
