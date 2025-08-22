@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage.new";
 import SignupPage from "./pages/Signup";
 import FindDoctors from "./pages/FindDoctors";
-import ChatBot from '../src/ChatBot';
+import ChatBot from './ChatBot';
 import WellnessLeaderboard from "./pages/WellnessLeaderboard";
 import HealthReport from "./pages/HealthReport";
 import Profile from "./pages/Profile/Profile"; // ✅ added
