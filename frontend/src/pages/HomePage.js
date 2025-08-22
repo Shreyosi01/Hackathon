@@ -8,6 +8,14 @@ export default function HomePage() {
   const loggedIn = isLoggedIn();
   const user = getUser();
 
+  // ✅ get profile path based on role
+  const profilePath =
+    user?.role === "doctor"
+      ? "/profile/doctor"
+      : user?.role === "ngo"
+      ? "/profile/ngo"
+      : "/profile/student"; // default to student
+
   return (
     <div className="homepage-root">
       {/* Header */}
@@ -32,9 +40,10 @@ export default function HomePage() {
         <div className="header-actions">
           {loggedIn ? (
             <div className="profile-actions">
-              <span className="user-name">
+              {/* ✅ Profile is now a clickable link */}
+              <Link to={profilePath} className="user-name">
                 👤 {user?.full_name || "Profile"}
-              </span>
+              </Link>
               <button className="logout-btn" onClick={logout}>
                 Logout
               </button>
@@ -80,7 +89,9 @@ export default function HomePage() {
           </div>
         </Link>
         <Link to="/ai-chatbot" className="feature-card">
-          <div className="feature-img feature-img3"><FaRobot size={32} color="#4a90e2"/></div>
+          <div className="feature-img feature-img3">
+            <FaRobot size={32} color="#4a90e2" />
+          </div>
           <div className="feature-title">AI Chatbot</div>
           <div className="feature-desc">
             Get instant answers to your health queries
