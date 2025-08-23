@@ -1,13 +1,19 @@
 .find-doctors-root {
   max-width: 700px;
   margin: 2rem auto;
-  background: #fff;
+  background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(44,62,80,0.08);
   padding: 2rem;
 }
+
+body {
+  background-color: #e6fafa; /* light teal background */
+}
+
+/* Location Button */
 .location-btn {
-  background: #4a90e2;
+  background: #14b8a6; /* teal-500 */
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -15,11 +21,19 @@
   font-size: 1rem;
   margin-bottom: 1rem;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
+.location-btn:hover {
+  background: #0d9488; /* teal-600 */
+}
+
+/* Error message */
 .error-msg {
-  color: #e74c3c;
+  color: #dc2626; /* red-600 */
   margin-bottom: 1rem;
 }
+
+/* Search bar */
 .search-bar {
   display: flex;
   margin: 1.5rem 0;
@@ -27,16 +41,73 @@
 .search-bar input {
   flex: 1;
   padding: 0.7rem;
-  border: 1px solid #c9e7f2;
+  border: 1px solid #99f6e4; /* light teal border */
   border-radius: 6px 0 0 6px;
   font-size: 1rem;
 }
-.search-bar button {
-  background: #1a3c5a;
+.search-bar select {
+  border: 1px solid #99f6e4;
+  border-left: none;
+  padding: 0.7rem;
+  font-size: 1rem;
+}
+.search-bar select:first-of-type {
+  border-radius: 0;
+}
+.search-bar select:last-of-type {
+  border-radius: 0 6px 6px 0;
+}
+
+/* Doctor card */
+.doctors-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.doctor-card {
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.15);
+}
+.doctor-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 0.75rem;
+  border: 3px solid #99f6e4; /* teal border around avatar */
+}
+.doctor-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0f172a; /* slate-900 */
+}
+.doctor-specialty {
+  font-size: 1rem;
+  color: #14b8a6; /* teal-500 */
+  margin-top: 0.25rem;
+}
+.doctor-location {
+  font-size: 0.9rem;
+  color: #475569; /* slate-600 */
+  margin-bottom: 0.75rem;
+}
+
+/* Contact Button */
+.contact-button {
+  background: #14b8a6;
   color: #fff;
   border: none;
-  border-radius: 0 6px 6px 0;
-  padding: 0.7rem 1.2rem;
-  font-size: 1rem;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+.contact-button:hover {
+  background: #0d9488;
 }
