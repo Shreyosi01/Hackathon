@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Container from "../components/Container";
 import { Line, Bar } from "react-chartjs-2";
 import {
@@ -25,49 +25,56 @@ Chart.register(
   Legend
 );
 
-const demoStudents = [
-  { name: "Aditi Sharma", points: 150, campaigns: 5 },
-  { name: "Rahul Mehta", points: 220, campaigns: 8 },
-  { name: "Sneha Verma", points: 180, campaigns: 6 },
-  { name: "Arjun Patel", points: 300, campaigns: 10 },
-  { name: "Ishaan Roy", points: 90, campaigns: 3 },
-];
-
 export default function Leaderboard() {
-  const [students, setStudents] = useState(demoStudents);
+  const [students, setStudents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const refreshScores = () => {
-    // Randomize points for demo effect
-    const updated = students.map((s) => ({
-      ...s,
-      points: Math.floor(Math.random() * 300) + 50,
-      campaigns: Math.floor(Math.random() * 10) + 1,
-    }));
-    setStudents(updated);
-  };
+  // Fetch leaderboard data from backend
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/leaderboard")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Error: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setStudents(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
-  // Sort students by points (descending)
-  const sorted = [...students].sort((a, b) => b.points - a.points);
+  if (loading) return <Container><p>Loading leaderboard...</p></Container>;
+  if (error) return <Container><p>Error loading leaderboard: {error}</p></Container>;
 
-  // Chart data from students
+  // Sort students by score (descending)
+  const sorted = [...students].sort((a, b) => b.score - a.score);
+
+  // Chart data from backend users
   const lineData = {
-    labels: sorted.map((s) => s.name),
+    labels: sorted.map((s) => s.full_name),
     datasets: [
       {
         label: "Wellness Points",
-        data: sorted.map((s) => s.points),
+        data: sorted.map((s) => s.score),
         fill: false,
         borderColor: "#06b6d4",
         tension: 0.3,
       },
     ],
   };
+
   const barData = {
-    labels: sorted.map((s) => s.name),
+    labels: sorted.map((s) => s.full_name),
     datasets: [
       {
         label: "Campaign Participation",
-        data: sorted.map((s) => s.campaigns),
+        data: sorted.map((s) => s.campaigns || 0), // if campaigns not in backend, default 0
         backgroundColor: "#2563eb",
       },
     ],
@@ -77,27 +84,20 @@ export default function Leaderboard() {
     <Container>
       <section className="leaderboard-section">
         <h2 className="leaderboard-heading">🏆 Wellness Leaderboard</h2>
-        <button
-          className="refresh-button"
-          onClick={refreshScores}
-          aria-label="Refresh leaderboard"
-        >
-          🔄 Refresh
-        </button>
 
         {/* Leaderboard list */}
         <div className="leaderboard-list">
           {sorted.map((s, index) => (
             <div
-              key={s.name}
+              key={s.id}
               className={`leaderboard-item ${
                 index === 0 ? "gold" : index === 1 ? "silver" : index === 2 ? "bronze" : ""
               }`}
             >
               <span className="rank">#{index + 1}</span>
-              <span className="student-name">{s.name}</span>
-              <span className="points">{s.points} pts</span>
-              <span className="campaigns">🎯 {s.campaigns} campaigns</span>
+              <span className="student-name">{s.full_name}</span>
+              <span className="points">{s.score} pts</span>
+              <span className="campaigns">🎯 {s.campaigns || 0} campaigns</span>
             </div>
           ))}
         </div>
