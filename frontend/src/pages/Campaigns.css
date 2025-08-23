@@ -1,0 +1,94 @@
+.campaigns-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.campaigns-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #0f766e; /* teal */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.tab-btn {
+  padding: 10px 18px;
+  margin: 0 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #e0f2f1;
+  color: #0f766e;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+  background: #0f766e;
+  color: white;
+}
+
+.tab-btn:hover {
+  background: #14b8a6;
+  color: white;
+}
+
+.campaign-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.campaign-card {
+  background: #ffffff;
+  border: 1px solid #cbd5d6;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.campaign-card:hover {
+  transform: translateY(-5px);
+}
+
+.campaign-title {
+  font-size: 20px;
+  color: #0f766e;
+  margin-bottom: 10px;
+}
+
+.campaign-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.campaign-date {
+  font-size: 13px;
+  color: #0d9488;
+  margin-bottom: 15px;
+}
+
+.join-btn {
+  padding: 8px 14px;
+  background: #0f766e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.join-btn:hover {
+  background: #14b8a6;
+}
