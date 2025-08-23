@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../components/Header";
-import "../components/Header.css";
 import axios from "axios";
 import "./LoginPage.css";
 import { useNavigate } from "react-router-dom";
@@ -57,14 +55,11 @@ export default function LoginPage() {
         password,
       });
 
-      // Save token
       localStorage.setItem("token", res.data.access_token);
 
-      // Show success message
       setIsError(false);
       setMessage("✅ Login successful! Redirecting...");
 
-      // Redirect to dashboard after 1.5 sec
       setTimeout(() => navigate("/"), 1500);
     } catch (err) {
       console.error("Login error:", err);
@@ -77,7 +72,6 @@ export default function LoginPage() {
 
   return (
     <div className="login-container">
-      <Header />
       <div className="login-center-wrapper">
         <div className="login-card login-centered-card">
           {/* Logo + Title + Subtitle */}

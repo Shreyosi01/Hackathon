@@ -18,21 +18,29 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 1rem;
+  padding: 1.5rem;
   box-sizing: border-box;
 }
 
 /* Card */
 .login-card {
   background: #ffffff;
-  border-radius: 16px;
-  padding: 2rem 2rem;
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
   width: 100%;
-  max-width: 520px;   /* slightly wider */
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  max-width: 600px;       /* wider */
+  min-height: 560px;      /* taller */
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.2);
 }
 
 /* Logo + Title */
@@ -40,18 +48,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .login-demo-title {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #006d77;
   margin-top: 0.8rem;
 }
 
 .login-demo-subtitle {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #6b7280;
   margin-top: 0.3rem;
 }
@@ -61,49 +69,40 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  margin-bottom: 1rem;
-}
-
-.login-lang {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  color: #1e88a8;
-  font-size: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .lang-select.small {
-  width: 70px;
-  padding: 0.35rem 0.5rem;
-  border: 1.2px solid #b2ebf2;
+  width: 80px;
+  padding: 0.4rem 0.6rem;
+  border: 1.4px solid #b2ebf2;
   border-radius: 6px;
   background: #f9fdfd;
   font-size: 0.9rem;
   cursor: pointer;
 }
 
-/* Labels FULL LEFT */
+/* Labels */
 .login-label {
   width: 100%;
   display: block;
   text-align: left;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #374151;
-  margin-bottom: 0.25rem;
-  padding-left: 0.2rem;  /* aligns with input text */
+  margin-bottom: 0.35rem;
+  padding-left: 0.2rem;
 }
 
 /* Inputs */
 .login-input {
   width: 100%;
-  padding: 0.85rem 1rem;
-  margin-bottom: 1rem;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.2rem;
   border: 1.5px solid #b2ebf2;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 1rem;
   background: #f9fdfd;
-  text-align: left;
   transition: all 0.2s ease;
 }
 
@@ -116,15 +115,15 @@
 /* Button */
 .login-btn {
   width: 100%;
-  padding: 0.9rem 0;
+  padding: 1rem 0;
   background: linear-gradient(90deg, #0097a7, #00bfa5);
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   transition: all 0.3s ease;
 }
 
@@ -135,8 +134,8 @@
 
 /* Footer */
 .login-footer {
-  margin-top: 1.2rem;
-  font-size: 0.95rem;
+  margin-top: 1.4rem;
+  font-size: 1rem;
   color: #4b5563;
   text-align: center;
 }

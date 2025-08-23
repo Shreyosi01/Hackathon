@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Header from "./components/Header";  // ✅ Import Header
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage.new";
 import SignupPage from "./pages/Signup";
 import FindDoctors from "./pages/FindDoctors";
 import ChatBot from './ChatBot';
 import HealthReport from "./pages/HealthReport";
-import Profile from "./pages/Profile"; // ✅ added
+import Profile from "./pages/Profile"; 
 import Footer from "./components/Footer";
 import VideoConsult from "./pages/VideoConsult";
 import WellnessLeaderboard from "./pages/Leaderboard";
@@ -29,6 +30,10 @@ function App() {
   return (
     <Router>
       <div className="app-container">
+        
+        {/* ✅ Header always visible */}
+        <Header />
+
         <Routes>
           {/* role gate */}
   {/* <Route path="/" element={<RoleSelection />} /> */}
@@ -73,10 +78,12 @@ function App() {
             <Route path="campaigns" element={<Campaigns />} />
           </Route>
         </Routes>
+
+        {/* ✅ Footer always visible */}
         <Footer />
       </div>
     </Router>
   );
 }
 
-export default App;
+export default App;
