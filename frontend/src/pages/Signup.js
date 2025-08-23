@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../components/Header";
-import "../components/Header.css";
 import "../styles/Signup.css";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +21,7 @@ export default function SignupPage() {
     setMessage("");
 
     try {
-      const res = await api.post("/register", {
+      await api.post("/register", {
         full_name: fullName,
         email,
         phone,
@@ -43,7 +41,6 @@ export default function SignupPage() {
 
   return (
     <div className="signup-container">
-      <Header />
       <div className="signup-center-wrapper">
         <div className="signup-card">
           <h2 className="signup-title">Create Account</h2>
