@@ -1,7 +1,7 @@
 import React from "react";
 import "./HomePage.css";
 import { Link } from "react-router-dom";
-import { FaRobot, FaTrophy, FaHeartbeat } from "react-icons/fa";
+import { FaRobot, FaTrophy, FaHeartbeat, FaUserMd, FaVideo } from "react-icons/fa";
 import { isLoggedIn, getUser, logout } from "../services/auth"; // ✅ import auth utils
 
 export default function HomePage() {
@@ -59,30 +59,23 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Search Bar */}
-      <div className="search-bar-row">
-        <select className="location-select">
-          <option>Visakhapatnam</option>
-          <option>Delhi</option>
-          <option>Mumbai</option>
-        </select>
-        <input
-          className="search-input"
-          placeholder="Search doctors, clinics, hospitals, etc."
-        />
-      </div>
+
 
       {/* Feature Cards / Widgets */}
       <div className="feature-cards-row">
         <Link to="/find-doctors" className="feature-card">
-          <div className="feature-img feature-img1"></div>
+          <div className="feature-img feature-img1">
+            <FaUserMd size={32} color="#00bcd4" />
+          </div>
           <div className="feature-title">Find Doctors</div>
           <div className="feature-desc">
             Search and book appointments with top doctors
           </div>
         </Link>
         <Link to="/video-consult" className="feature-card">
-          <div className="feature-img feature-img2"></div>
+          <div className="feature-img feature-img2">
+            <FaVideo size={32} color="#00bcd4" />
+          </div>
           <div className="feature-title">Video Consult</div>
           <div className="feature-desc">
             Instant video consultation with specialists
@@ -122,7 +115,7 @@ export default function HomePage() {
             specialists
           </div>
         </div>
-        <button className="view-all-btn">View All Specialities</button>
+
       </div>
     </div>
   );
