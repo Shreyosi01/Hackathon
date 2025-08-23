@@ -9,7 +9,7 @@ router = APIRouter()
 
 @router.get("/my_profile", response_model=UserResponse)
 def get_my_profile(current_user: models.User = Depends(get_current_user)):
-    return UserResponse.from_orm(current_user)
+    return UserResponse.model_validate(current_user)
 
 @router.get("/users/{user_id}", response_model=schemas.UserResponse)
 def get_user_by_id(
