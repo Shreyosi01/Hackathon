@@ -29,8 +29,18 @@ export default function HomePage() {
       <header className="homepage-header">
         <div className="logo">CareSync</div>
         <nav className="nav-links">
-          <Link to="/find-doctors">Find Doctors</Link>
-          <Link to="/video-consult">Video Consult</Link>
+          <Link to="/">
+            <span role="img" aria-label="Home" style={{ marginRight: 4 }}>🏠</span>
+            Home
+          </Link>
+          <Link to="/find-doctors">
+            <FaUserMd style={{ marginRight: 4 }} />
+            Find Doctors
+          </Link>
+          <Link to="/video-consult">
+            <FaVideo style={{ marginRight: 4 }} />
+            Video Consult
+          </Link>
           <Link to="/ai-chatbot">
             <FaRobot style={{ marginRight: 4 }} />
             AI Chatbot

@@ -31,6 +31,17 @@ class UserResponse(BaseModel):
     role: RoleEnum
 
     model_config = ConfigDict(from_attributes=True)
+class StudentResponse(BaseModel):
+    id: int
+    name: str
+    course: str
+    year: int
+
+class DoctorResponse(BaseModel):
+    id: int
+    name: str
+    specialization: str
+    license_number: str
 
 
 class UserLogin(BaseModel):
