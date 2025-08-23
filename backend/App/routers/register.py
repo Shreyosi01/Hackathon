@@ -4,7 +4,6 @@ from passlib.context import CryptContext
 from sqlalchemy.exc import IntegrityError
 from ..models import User
 from .. import schemas
-from ..utils.security import encrypt_data, hash_deterministic
 
 router = APIRouter()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -13,26 +12,20 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def register_user(user: schemas.UserCreate):
     db = SessionLocal()
 
-    encrypted_email = encrypt_data(user.email)
-    email_hash = hash_deterministic(user.email)
-
-    encrypted_phone = encrypt_data(user.phone)
-    phone_hash = hash_deterministic(user.phone)
-
-    existing_email = db.query(User).filter(User.email_hash == email_hash).first()
+    # check duplicates directly on plain email/phone
+    existing_email = db.query(User).filter(User.email == user.email).first()
     if existing_email:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    existing_phone = db.query(User).filter(User.phone_hash == phone_hash).first()
+    existing_phone = db.query(User).filter(User.phone == user.phone).first()
     if existing_phone:
         raise HTTPException(status_code=400, detail="Phone number already registered")
 
+
     new_user = User(
-        full_name=encrypt_data(user.full_name),
-        email_encrypted=encrypt_data(user.email),   # ✅ new name
-        email_hash=hash_deterministic(user.email),  # ✅ lookup hash
-        phone_encrypted=encrypt_data(user.phone),   # ✅ new name
-        phone_hash=hash_deterministic(user.phone),
+        full_name=user.full_name,
+        email=user.email,  # ✅ lookup hash
+        phone=user.phone,
         hashed_password=pwd_context.hash(user.password),
         role=user.role
     )
