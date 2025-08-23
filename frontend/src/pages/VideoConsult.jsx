@@ -1,6 +1,19 @@
+
 import { useState } from "react";
 import Container from "../components/Container";
-import "./VideoConsult.css"; // import the CSS file
+import "./VideoConsult.css";
+
+function SuccessPopup({ onClose }) {
+  return (
+    <div className="video-popup-overlay">
+      <div className="video-popup">
+        <h3 className="video-popup-title">Booking Confirmed!</h3>
+        <p className="video-popup-message">Your video consultation has been successfully booked.</p>
+        <button className="video-popup-btn" onClick={onClose}>OK</button>
+      </div>
+    </div>
+  );
+}
 
 const mockDoctors = [
   "Dr. Asha Mehra",
@@ -10,14 +23,16 @@ const mockDoctors = [
   "Dr. Sunita Rao",
 ];
 
+
 export default function VideoConsult() {
   const [form, setForm] = useState({ date: "", doctor: "", reason: "" });
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    setShowPopup(true);
+    // Optionally, send booking data to backend here
   };
-
   return (
     <Container>
       <section className="video-section">
@@ -57,7 +72,6 @@ export default function VideoConsult() {
             placeholder="Describe your issue"
             required
           />
-
           <button
             type="submit"
             className="video-button"
@@ -66,6 +80,7 @@ export default function VideoConsult() {
             Book
           </button>
         </form>
+        {showPopup && <SuccessPopup onClose={() => setShowPopup(false)} />}
       </section>
     </Container>
   );
