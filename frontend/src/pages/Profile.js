@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import StudentProfile from "./Student";
-import DoctorProfile from "./Doctor";
-import { fetchMyProfile } from "../../services/auth";
+import StudentProfile from "./Profile/Student";
+import DoctorProfile from "./Profile/Doctor";
+import { fetchMyProfile } from "../services/auth";
 
 export default function Profile() {
   const [profile, setProfile] = useState(null);

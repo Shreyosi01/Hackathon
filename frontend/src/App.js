@@ -7,7 +7,7 @@ import FindDoctors from "./pages/FindDoctors";
 import ChatBot from './ChatBot';
 import WellnessLeaderboard from "./pages/WellnessLeaderboard";
 import HealthReport from "./pages/HealthReport";
-import Profile from "./pages/Profile/Profile"; // ✅ added
+import Profile from "./pages/Profile"; // ✅ added
 import Footer from "./components/Footer";
 import VideoConsult from "./pages/VideoConsult";
 

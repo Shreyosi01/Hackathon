@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import './Doctor.css'; // 👈 link the css file
+import React from "react";
+import { motion } from "framer-motion";
+import "./Doctor.css"; // 👈 make sure this CSS file exists
 
 export default function Doctor({ user }) {
   return (
@@ -17,7 +17,9 @@ export default function Doctor({ user }) {
               <img
                 src={
                   user.avatar ||
-                  `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}`
+                  `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                    user.name || "Doctor"
+                  )}`
                 }
                 alt={user.name}
                 className="doctor-avatar"
@@ -39,7 +41,9 @@ export default function Doctor({ user }) {
           <div className="doctor-details">
             <div>
               <h1 className="doctor-name">Dr. {user.name}</h1>
-              <p className="doctor-specialty">{user.specialty || 'Medical Professional'}</p>
+              <p className="doctor-specialty">
+                {user.specialty || "Medical Professional"}
+              </p>
               <p className="doctor-email">{user.email}</p>
             </div>
 
@@ -51,19 +55,19 @@ export default function Doctor({ user }) {
                   <p>
                     <span className="label">Registration No: </span>
                     <span className="value">
-                      {user.registrationNumber || 'Not set'}
+                      {user.registrationNumber || "Not set"}
                     </span>
                   </p>
                   <p>
                     <span className="label">Experience: </span>
                     <span className="value">
-                      {user.experience ? `${user.experience} years` : 'Not set'}
+                      {user.experience ? `${user.experience} years` : "Not set"}
                     </span>
                   </p>
                   <div>
                     <p className="label">Qualifications:</p>
                     <div className="doctor-qualifications">
-                      {(user.qualifications || ['MBBS']).map((qual, i) => (
+                      {(user.qualifications || ["MBBS"]).map((qual, i) => (
                         <span key={i} className="qualification">
                           {qual}
                         </span>
@@ -96,11 +100,13 @@ export default function Doctor({ user }) {
                       </div>
                     </div>
                   </div>
+
                   <div className="divider" />
+
                   <div>
                     <p className="label">Availability</p>
                     <div className="doctor-days">
-                      {['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day) => (
+                      {["Mon", "Tue", "Wed", "Thu", "Fri"].map((day) => (
                         <div key={day} className="day">
                           {day}
                         </div>

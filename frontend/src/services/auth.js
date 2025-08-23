@@ -32,13 +32,12 @@ export async function fetchMyProfile() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`, // if using JWT
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // if JWT
       },
       credentials: "include", // if using cookies
     });
 
     if (!res.ok) throw new Error("Failed to fetch profile");
-
     return await res.json();
   } catch (err) {
     console.error("Error fetching profile:", err);

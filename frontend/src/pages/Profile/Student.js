@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import './Student.css';
+import React from "react";
+import { motion } from "framer-motion";
+import "./Student.css";
 
 export default function StudentProfile({ user }) {
   return (
@@ -18,7 +18,7 @@ export default function StudentProfile({ user }) {
                 src={
                   user.avatar ||
                   `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                    user.name
+                    user.name || "Student"
                   )}`
                 }
                 alt={user.name}
@@ -41,8 +41,9 @@ export default function StudentProfile({ user }) {
           <div className="student-details">
             <div>
               <h1 className="student-name">{user.name}</h1>
-              <p className="student-course">{user.course || 'Student'}</p>
+              <p className="student-course">{user.course || "Student"}</p>
               <p className="student-email">{user.email}</p>
+              <p className="student-phone">{user.phone || "Phone not set"}</p>
             </div>
 
             <div className="student-grid">
@@ -52,15 +53,15 @@ export default function StudentProfile({ user }) {
                 <div className="student-box">
                   <p>
                     <span className="label">Student ID: </span>
-                    <span className="value">{user.studentId || 'Not set'}</span>
+                    <span className="value">{user.studentId || "Not set"}</span>
                   </p>
                   <p>
                     <span className="label">Course: </span>
-                    <span className="value">{user.course || 'Not set'}</span>
+                    <span className="value">{user.course || "Not set"}</span>
                   </p>
                   <p>
                     <span className="label">Semester: </span>
-                    <span className="value">{user.semester || 'Not set'}</span>
+                    <span className="value">{user.semester || "Not set"}</span>
                   </p>
                 </div>
               </div>
@@ -85,9 +86,9 @@ export default function StudentProfile({ user }) {
               <h3 className="student-subtitle">Recent Activity</h3>
               <div className="student-activity-list">
                 {[
-                  'Completed health assessment',
-                  'Attended mental health webinar',
-                  'Updated vaccination records',
+                  "Completed health assessment",
+                  "Attended mental health webinar",
+                  "Updated vaccination records",
                 ].map((activity, i) => (
                   <div key={i} className="student-activity-item">
                     <div className="student-activity-dot" />
