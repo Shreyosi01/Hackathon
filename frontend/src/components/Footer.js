@@ -11,7 +11,7 @@ export default function Footer() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
-    <footer className="bg-blue-50 border-t mt-12 pt-8 pb-4 text-sm text-gray-700 relative">
+    <footer className="bg-blue-50 border-t mt-8 pt-8 pb-4 text-sm text-gray-700 relative">
       <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-6 px-4">
         <div>
           <h3 className="font-bold mb-2">About CareSync</h3>
