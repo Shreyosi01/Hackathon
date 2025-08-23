@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./LoginPage.css";
 import { useNavigate } from "react-router-dom";
@@ -36,35 +36,52 @@ const text = {
 };
 
 export default function LoginPage() {
-  const [identifier, setIdentifier] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [lang, setLang] = React.useState("EN");
-  const [loading, setLoading] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-  const [isError, setIsError] = React.useState(false);
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [lang, setLang] = useState("EN");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+
   const navigate = useNavigate();
 
+  // Handle form submit (Login process)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/login", {
+      const response = await axios.post("http://127.0.0.1:8000/login", {
         identifier,
         password,
       });
 
-      localStorage.setItem("token", res.data.access_token);
+      // Expected API response: { access_token, role: "doctor"/"student" }
+      const { access_token, role } = response.data;
+
+      // Save token & role for authentication persistence
+      localStorage.setItem("token", access_token);
+      localStorage.setItem("role", role);
 
       setIsError(false);
       setMessage("✅ Login successful! Redirecting...");
 
-      setTimeout(() => navigate("/"), 1500);
-    } catch (err) {
-      console.error("Login error:", err);
+      // Redirect to proper dashboard based on role
+      setTimeout(() => {
+        if (role === "doctor") {
+  navigate("/doctor");
+} else if (role === "admin") {
+  navigate("/admin");
+} else {
+  navigate("/home");
+}
+      }, 1500);
+
+    } catch (error) {
+      console.error("Login error:", error);
       setIsError(true);
-      setMessage("❌ Login failed. Please check your details.");
+      setMessage("❌ Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
     }
@@ -74,6 +91,7 @@ export default function LoginPage() {
     <div className="login-container">
       <div className="login-center-wrapper">
         <div className="login-card login-centered-card">
+
           {/* Logo + Title + Subtitle */}
           <div className="login-demo-top">
             <div className="login-demo-title">{text[lang].title}</div>
@@ -87,15 +105,15 @@ export default function LoginPage() {
               value={lang}
               onChange={(e) => setLang(e.target.value)}
             >
-              {languages.map((l) => (
-                <option key={l.code} value={l.code}>
-                  {l.code}
+              {languages.map(({ code, label }) => (
+                <option key={code} value={code}>
+                  {label}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Form */}
+          {/* Login Form */}
           <form className="login-form" onSubmit={handleSubmit}>
             <label className="login-label">{text[lang].email}</label>
             <input
@@ -126,7 +144,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Success/Error message */}
+          {/* Success/Error Message */}
           {message && (
             <p
               className={`login-message ${
@@ -137,11 +155,10 @@ export default function LoginPage() {
             </p>
           )}
 
-          {/* Signup + Footer */}
+          {/* Signup Link + Footer */}
           <div className="switch-auth">
             {text[lang].signupPrompt} <a href="/signup">{text[lang].signup}</a>
           </div>
-
           <div className="login-footer">{text[lang].footer}</div>
         </div>
       </div>
