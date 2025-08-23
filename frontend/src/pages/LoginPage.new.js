@@ -89,6 +89,7 @@ export default function LoginPage() {
 
   return (
     <div className="login-container">
+      <Header/>
       <div className="login-center-wrapper">
         <div className="login-card login-centered-card">
 
