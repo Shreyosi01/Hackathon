@@ -30,6 +30,7 @@
 .nav-links {
   display: flex;
   gap: 1.8rem;
+  margin-left: 3rem;
 }
 
 .nav-links a {

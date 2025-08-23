@@ -10,6 +10,7 @@ import Profile from "./pages/Profile"; // ✅ added
 import Footer from "./components/Footer";
 import VideoConsult from "./pages/VideoConsult";
 import WellnessLeaderboard from "./pages/Leaderboard";
+import Campaigns from "./pages/Campaigns";
 
 function App() {
   return (
@@ -21,20 +22,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/find-doctors" element={<FindDoctors />} />
           <Route path="/video-consult" element={<VideoConsult />} />
-          <Route
-            path="/video-consult"
-            element={
-              <div
-                style={{
-                  padding: "3rem",
-                  textAlign: "center",
-                  fontSize: "2rem",
-                }}
-              >
-                Video Consult (Coming Soon)
-              </div>
-            }
-          />
+          <Route path="/campaigns" element={<Campaigns />} />
           <Route path="/ai-chatbot" element={<ChatBot />} />
           <Route path="/wellness-leaderboard" element={<WellnessLeaderboard />} />
           <Route path="/health-report" element={<HealthReport />} />
