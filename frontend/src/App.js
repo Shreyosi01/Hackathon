@@ -1,18 +1,17 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage.new";
 import SignupPage from "./pages/Signup";
 import FindDoctors from "./pages/FindDoctors";
 import ChatBot from './ChatBot';
 import HealthReport from "./pages/HealthReport";
-import Profile from "./pages/Profile"; 
+import Profile from "./pages/Profile/Student"; 
 import VideoConsult from "./pages/VideoConsult";
 import WellnessLeaderboard from "./pages/Leaderboard";
 import Campaigns from "./pages/Campaigns";
-
+import ProfileDoc from "./pages/Profile/Doctor";
 import AdminLayout from "./pages/Admin/AdminLayout";
 import ReportsList from "./pages/Admin/ReportsList";
 import ReportDetail from "./pages/Admin/ReportDetail";
@@ -40,13 +39,13 @@ function App() {
           <Route path="/wellness-leaderboard" element={<WellnessLeaderboard />} />
           <Route path="/health-report" element={<HealthReport />} />
           <Route path="/profile/student" element={<Profile />} />
-          <Route path="/profile/doctor" element={<Profile />} />
+          <Route path="/profile/doctor" element={<ProfileDoc />} />
 
           {/* Doctor Dashboard */}
           <Route path="/doctor" element={<DoctorDashboard />} />
 
           {/* Admin Layout with Nested Routes */}
-          <Route path="/admin" element={<AdminLayout />}>
+          <Route path="/admin" element={<AdminDashboard />}>
             <Route index element={<AdminDashboard />} />
             <Route path="reports" element={<ReportsList />} />
             <Route path="reports/:id" element={<ReportDetail />} />

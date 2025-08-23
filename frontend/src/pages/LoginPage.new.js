@@ -69,9 +69,10 @@ export default function LoginPage() {
 
       // Redirect to proper dashboard based on role
       setTimeout(() => {
-        if (role === "doctor") {
+        const userRole = role?.toLowerCase(); // normalize
+        if (userRole === "doctor") {
   navigate("/doctor");
-} else if (role === "admin") {
+} else if (userRole === "admin") {
   navigate("/admin");
 } else {
   navigate("/home");
@@ -89,7 +90,7 @@ export default function LoginPage() {
 
   return (
     <div className="login-container">
-      <Header/>
+
       <div className="login-center-wrapper">
         <div className="login-card login-centered-card">
 
