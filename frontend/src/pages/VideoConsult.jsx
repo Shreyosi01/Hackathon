@@ -6,7 +6,7 @@ function SuccessPopup({ onClose }) {
   return (
     <div className="video-popup-overlay">
       <div className="video-popup">
-        <h3 className="video-popup-title">Booking Confirmed!</h3>
+        <h3 className="video-popup-title">🎉 Booking Confirmed!</h3>
         <p className="video-popup-message">
           Your video consultation has been successfully booked.
         </p>
@@ -28,16 +28,16 @@ export default function VideoConsult() {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem("token"); // assuming JWT is saved in localStorage
+      const token = localStorage.getItem("token");
 
       const response = await fetch("http://localhost:8000/appointments/book", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // send JWT for auth
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          doctor_id: parseInt(form.doctor), // assuming doctor_id is numeric
+          doctor_id: parseInt(form.doctor),
           date_time: form.date,
           description: form.reason,
         }),
@@ -91,22 +91,20 @@ export default function VideoConsult() {
           </select>
 
           <label htmlFor="reason" className="video-label">Reason</label>
-          <input
+          <textarea
             id="reason"
-            type="text"
-            className="video-input"
+            className="video-input textarea"
             value={form.reason}
             onChange={(e) => setForm((f) => ({ ...f, reason: e.target.value }))}
-            placeholder="Describe your issue"
+            placeholder="Describe your issue..."
             required
           />
           <button
             type="submit"
             className="video-button"
-            aria-label="Book video consultation"
             disabled={loading}
           >
-            {loading ? "Booking..." : "Book"}
+            {loading ? "Booking..." : "Book Appointment"}
           </button>
         </form>
 

@@ -1,10 +1,7 @@
-
 import React, { useState, useMemo } from 'react';
 import './FindDoctors.css';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-
 
 const mockDoctors = [
   { name: "Dr. Asha Mehra", specialty: "Cardiologist", rating: 4.8, location: "Delhi", avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
@@ -16,10 +13,12 @@ const mockDoctors = [
 
 const containerStyle = {
   width: '100%',
-  height: '400px',
-  margin: '20px 0'
+  height: '350px',
+  margin: '20px 0',
+  borderRadius: '12px',
+  overflow: 'hidden',
+  boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
 };
-
 
 export default function FindDoctors() {
   const [location, setLocation] = useState(null);
@@ -28,20 +27,6 @@ export default function FindDoctors() {
   const [search, setSearch] = useState("");
   const [specialty, setSpecialty] = useState("");
   const [city, setCity] = useState("");
-
-  // If you want to fetch from backend, replace mockDoctors above and uncomment below
-  // React.useEffect(() => {
-  //   async function fetchDoctors() {
-  //     try {
-  //       const res = await fetch('/api/doctors');
-  //       const data = await res.json();
-  //       setDoctors(data);
-  //     } catch (err) {
-  //       console.error('Error fetching doctors:', err);
-  //     }
-  //   }
-  //   fetchDoctors();
-  // }, []);
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -54,56 +39,49 @@ export default function FindDoctors() {
     }
   };
 
-  // Get unique specialties and cities for filters
   const specialties = useMemo(() => Array.from(new Set(mockDoctors.map(d => d.specialty).filter(Boolean))), []);
-  const cities = useMemo(() => Array.from(new Set(mockDoctors.map(d => d.location || d.city).filter(Boolean))), []);
+  const cities = useMemo(() => Array.from(new Set(mockDoctors.map(d => d.location).filter(Boolean))), []);
 
-  // Filter doctors
   const filteredDoctors = useMemo(() => {
     return doctors.filter(d => {
-      const matchesSearch = search === "" || d.name.toLowerCase().includes(search.toLowerCase()) || d.specialty?.toLowerCase().includes(search.toLowerCase());
+      const matchesSearch =
+        search === "" ||
+        d.name.toLowerCase().includes(search.toLowerCase()) ||
+        d.specialty?.toLowerCase().includes(search.toLowerCase());
       const matchesSpecialty = !specialty || d.specialty === specialty;
-      const matchesCity = !city || d.location === city || d.city === city;
+      const matchesCity = !city || d.location === city;
       return matchesSearch && matchesSpecialty && matchesCity;
     });
   }, [doctors, search, specialty, city]);
 
   return (
     <div className="find-doctors-root">
-      <h2>Find Doctors Near You</h2>
-      <button className="location-btn" onClick={getLocation}>Use My Location</button>
+      <h2 className="page-title">🩺 Find Doctors Near You</h2>
+      <button className="location-btn" onClick={getLocation}>📍 Use My Location</button>
       {error && <div className="error-msg">{error}</div>}
+
       {location && (
         <MapContainer
           center={[location.lat, location.lng]}
-          zoom={14}
+          zoom={13}
           style={containerStyle}
           scrollWheelZoom={true}
         >
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker position={[location.lat, location.lng]}>
             <Popup>You are here</Popup>
           </Marker>
-          {filteredDoctors && filteredDoctors.map((doc, idx) => (
-            doc.lat && doc.lng && (
-              <Marker key={idx} position={[doc.lat, doc.lng]}>
-                <Popup>
-                  <b>{doc.name}</b><br />
-                  {doc.specialty}<br />
-                  {doc.address}
-                </Popup>
-              </Marker>
-            )
-          ))}
         </MapContainer>
       )}
-      <div className="search-bar doctors-search-bar">
+
+      {/* Search Filters */}
+      <div className="search-bar">
         <input
           className="doctor-search-input"
-          placeholder="Search by name or specialty..."
+          placeholder="🔍 Search by name or specialty..."
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
@@ -124,20 +102,25 @@ export default function FindDoctors() {
           {cities.map(c => <option key={c}>{c}</option>)}
         </select>
       </div>
+
+      {/* Doctors Grid */}
       <div className="doctors-grid">
         {filteredDoctors.length === 0 ? (
-          <div style={{textAlign: 'center', width: '100%', color: '#6b7280', margin: '2rem 0'}}>No doctors found.</div>
+          <div className="no-results">No doctors found 😔</div>
         ) : (
           filteredDoctors.map((d) => (
             <div key={d.name} className="doctor-card">
-              <img src={d.avatar || "https://randomuser.me/api/portraits/lego/1.jpg"} alt={d.name} className="doctor-avatar" />
+              <img src={d.avatar} alt={d.name} className="doctor-avatar" />
               <h3 className="doctor-name">{d.name}</h3>
               <div className="doctor-specialty">{d.specialty}</div>
-              <div className="doctor-location">{d.location || d.city}</div>
+              <div className="doctor-location">📍 {d.location}</div>
+              <div className="doctor-rating">⭐ {d.rating}</div>
               <button
                 className="contact-button"
                 aria-label={`Contact ${d.name}`}
-                onClick={() => window.open(`mailto:team@caresync.com?subject=Contact%20${encodeURIComponent(d.name)}`)}
+                onClick={() =>
+                  window.open(`mailto:team@caresync.com?subject=Contact%20${encodeURIComponent(d.name)}`)
+                }
               >
                 Contact
               </button>
