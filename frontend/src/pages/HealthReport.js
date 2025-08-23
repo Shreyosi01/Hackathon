@@ -20,11 +20,11 @@ export default function HealthReport() {
       setMessage('❌ Geolocation not supported');
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const token = localStorage.getItem('token'); // 👈 assuming you save JWT here after login
+      const token = localStorage.getItem('token'); 
 
       const payload = {
         is_emergency: emergency,
@@ -32,7 +32,7 @@ export default function HealthReport() {
         mental_health_related: mentalHealth,
         latitude: location?.lat || null,
         longitude: location?.lng || null,
-        photo_url: photo ? photo.name : null // for now just save filename
+        photo_url: photo ? photo.name : null 
       };
 
       const res = await axios.post("http://127.0.0.1:8000/reports/create", payload, {
@@ -50,18 +50,25 @@ export default function HealthReport() {
       setMessage("❌ Failed to submit report");
     }
   };
+
   return (
     <div className="health-report-root">
-      <h2>Report Health Issue</h2>
+      <h2 className="page-title">🩺 Report Health Issue</h2>
       <p className="subtitle">Help us understand your health concerns</p>
+      
       <form className="health-report-card" onSubmit={handleSubmit}>
         
         <div className="checkbox-row">
-          <input type="checkbox" id="emergency" checked={emergency} onChange={e => setEmergency(e.target.checked)} />
+          <input 
+            type="checkbox" 
+            id="emergency" 
+            checked={emergency} 
+            onChange={e => setEmergency(e.target.checked)} 
+          />
           <label htmlFor="emergency" className="checkbox-label">⚠️ Is this an emergency?</label>
         </div>
 
-        <label className="label">Describe your symptoms</label>
+        <label className="label">📝 Describe your symptoms</label>
         <textarea
           className="input"
           placeholder="Please describe what you are experiencing..."
@@ -70,26 +77,38 @@ export default function HealthReport() {
         />
 
         <div className="checkbox-row">
-          <input type="checkbox" id="mentalHealth" checked={mentalHealth} onChange={e => setMentalHealth(e.target.checked)} />
-          <label htmlFor="mentalHealth" className="checkbox-label">Mental health related</label>
+          <input 
+            type="checkbox" 
+            id="mentalHealth" 
+            checked={mentalHealth} 
+            onChange={e => setMentalHealth(e.target.checked)} 
+          />
+          <label htmlFor="mentalHealth" className="checkbox-label">💭 Mental health related</label>
         </div>
 
         <div className="location-row">
           <button type="button" className="location-btn" onClick={getLocation}>
             📍 Use Current Location
           </button>
-          {location && <span className="location-info">Lat: {location.lat}, Lng: {location.lng}</span>}
+          {location && (
+            <span className="location-info">
+              Lat: {location.lat}, Lng: {location.lng}
+            </span>
+          )}
         </div>
 
         <div className="photo-upload">
-          <label>Add Photo (Optional)</label>
-          <input type="file" onChange={(e) => setPhoto(e.target.files[0])} />
+          <label className="label">📷 Add Photo (Optional)</label>
+          <div className="photo-box">
+            <input type="file" onChange={(e) => setPhoto(e.target.files[0])} />
+            {photo && <p className="file-name">📂 {photo.name}</p>}
+          </div>
         </div>
 
-        <button type="submit" className="submit-btn">Submit Report</button>
+        <button type="submit" className="submit-btn">🚀 Submit Report</button>
       </form>
 
-      {message && <p>{message}</p>}
+      {message && <p className="status-message">{message}</p>}
     </div>
   );
 }
