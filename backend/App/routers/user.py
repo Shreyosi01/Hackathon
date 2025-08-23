@@ -3,13 +3,28 @@ from sqlalchemy.orm import Session
 from .. import models, schemas
 from ..database import get_db
 from ..core.auth import get_current_user
-from ..schemas import UserResponse
+from ..schemas import UserResponse,StudentResponse,DoctorResponse
 
 router = APIRouter()
 
-@router.get("/my_profile", response_model=UserResponse)
-def get_my_profile(current_user: models.User = Depends(get_current_user)):
-    return UserResponse.model_validate(current_user)
+@router.get("/profile")
+def get_profile(current_user=Depends(get_current_user)):
+    if current_user.role == "Student":
+        return StudentResponse(
+            id=current_user.id,
+            name=current_user.name,
+            course=current_user.course,
+            year=current_user.year,
+        )
+    elif current_user.role == "Doctor":
+        return DoctorResponse(
+            id=current_user.id,
+            name=current_user.name,
+            specialization=current_user.specialization,
+            license_number=current_user.license_number,
+        )
+    else:
+        raise HTTPException(status_code=400, detail="Unsupported role")
 
 @router.get("/users/{user_id}", response_model=schemas.UserResponse)
 def get_user_by_id(
