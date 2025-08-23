@@ -1,3 +1,53 @@
+/* Popup styles for booking confirmation */
+.video-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.video-popup {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 90vw;
+  min-width: 300px;
+}
+
+.video-popup-title {
+  color: #2563eb;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.video-popup-message {
+  color: #374151;
+  margin-bottom: 1.5rem;
+}
+
+.video-popup-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+}
+.video-popup-btn:hover {
+  background: #1e40af;
+}
 .video-section {
   padding: 2.5rem 1rem;
   max-width: 40rem;
