@@ -60,36 +60,6 @@
   background-color: #0097a7;
 }
 
-/* SEARCH BAR */
-.search-bar-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.6rem;
-  margin: 2.5rem 0 2rem;
-  flex-wrap: wrap;
-}
-
-.location-select,
-.search-input {
-  padding: 0.7rem 1rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1.5px solid #b2dfdb;
-  outline: none;
-  background-color: #ffffff;
-  transition: border 0.2s;
-}
-
-.location-select:focus,
-.search-input:focus {
-  border-color: #00bcd4;
-}
-
-.search-input {
-  width: 320px;
-}
-
 /* FEATURE CARDS */
 .feature-cards-row {
   display: flex;
@@ -97,10 +67,11 @@
   justify-content: center;
   gap: 2rem;
   padding: 0 2rem;
+  margin-top: 3rem; /* ✅ Lower cards from header */
 }
 
 .feature-card {
-  background: linear-gradient(145deg, #00bfa5, #009688);
+  background: linear-gradient(145deg, #26a69a, #00796b); /* ✅ updated teal palette */
   border-radius: 20px;
   width: 260px;
   min-height: 280px;
@@ -121,7 +92,7 @@
   width: 80px;
   height: 80px;
   margin: 0 auto 1rem auto;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   display: flex;
   justify-content: center;
@@ -139,7 +110,7 @@
   color: #e0f2f1;
 }
 
-/* BOTTOM SECTION (UNCHANGED) */
+/* BOTTOM SECTION */
 .homepage-bottom {
   display: flex;
   flex-direction: column;
@@ -186,17 +157,9 @@
     justify-content: center;
   }
 
-  .search-bar-row {
-    flex-direction: column;
-  }
-
   .feature-cards-row {
     flex-direction: column;
     gap: 1.5rem;
-  }
-
-  .search-input {
-    width: 85vw;
   }
 
   .feature-card {
