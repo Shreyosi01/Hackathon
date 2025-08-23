@@ -7,6 +7,21 @@ from datetime import datetime
 
 router = APIRouter()
 
+@router.get("/campaigns")
+def get_campaigns(db: Session = Depends(get_db)):
+    # Assuming you have a Campaign model in DB
+    campaigns = db.query(models.Campaign).all()
+    return [
+        {
+            "id": c.id,
+            "title": c.title,
+            "description": c.description,
+            "date": c.date,
+            "status": c.status  # "ongoing" or "upcoming"
+        }
+        for c in campaigns
+    ]
+
 # ✅ Create campaign (admin only)
 @router.post("/campaigns", response_model=schemas.CampaignResponse)
 def create_campaign(campaign: schemas.CampaignCreate,
