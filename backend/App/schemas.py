@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 from enum import Enum
 from datetime import datetime
+from pydantic import ConfigDict
 
 class RoleEnum(str, Enum):
     student = "Student"
@@ -29,8 +30,7 @@ class UserResponse(BaseModel):
     phone: str
     role: RoleEnum
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserLogin(BaseModel):
