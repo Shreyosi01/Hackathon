@@ -1,21 +1,11 @@
-import React from "react";
-import "./Header.css";
+import React from 'react';
+import './Header.css';
 import { Link } from "react-router-dom";
-import {
-  FaRobot,
-  FaTrophy,
-  FaHeartbeat,
-  FaUserMd,
-  FaVideo,
-  FaBullhorn,
-} from "react-icons/fa";
-import { isLoggedIn, getUser, logout } from "../services/auth"; 
+import { isLoggedIn, getUser, logout } from "../services/auth";
 
 export default function Header() {
   const loggedIn = isLoggedIn();
   const user = getUser();
-
-  // ✅ Profile path based on role
   const profilePath =
     user?.role === "doctor"
       ? "/profile/doctor"
@@ -24,42 +14,20 @@ export default function Header() {
       : "/profile/student";
 
   return (
-    <header className="homepage-header">
-      {/* Logo */}
-      <div className="logo">CareSync</div>
+    <header className="main-header">
+      {/* Logo - clickable to go home */}
+      <Link to="/" className="logo-btn">
+        Care<span className="logo-highlight">Sync</span>
+      </Link>
 
-      {/* Navigation */}
+      {/* Navigation (Home removed) */}
       <nav className="nav-links">
-        <Link to="/">
-          <span role="img" aria-label="Home" style={{ marginRight: 4 }}>
-            🏠
-          </span>
-          Home
-        </Link>
-        <Link to="/find-doctors">
-          <FaUserMd style={{ marginRight: 4 }} />
-          Find Doctors
-        </Link>
-        <Link to="/video-consult">
-          <FaVideo style={{ marginRight: 4 }} />
-          Video Consult
-        </Link>
-        <Link to="/ai-chatbot">
-          <FaRobot style={{ marginRight: 4 }} />
-          AI Chatbot
-        </Link>
-        <Link to="/wellness-leaderboard">
-          <FaTrophy style={{ marginRight: 4 }} />
-          Wellness Leaderboard
-        </Link>
-        <Link to="/health-report">
-          <FaHeartbeat style={{ marginRight: 4 }} />
-          Health Reporting
-        </Link>
-        <Link to="/campaigns">
-          <FaBullhorn style={{ marginRight: 4 }} />
-          Campaigns
-        </Link>
+        <Link to="/find-doctors">👨‍⚕️ Find Doctors</Link>
+        <Link to="/video-consult">🎥 Video Consult</Link>
+        <Link to="/ai-chatbot">🤖 AI Chatbot</Link>
+        <Link to="/wellness-leaderboard">🏆 Leaderboard</Link>
+        <Link to="/health-report">❤️ Health Report</Link>
+        <Link to="/campaigns">📢 Campaigns</Link>
       </nav>
 
       {/* Right side actions */}

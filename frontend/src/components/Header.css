@@ -1,44 +1,93 @@
 .main-header {
-  width: 100%;
   display: flex;
-  justify-content: space-between; /* ✅ Logo left, button right */
   align-items: center;
-  padding: 1rem 2rem;
-  background: #00695c; /* teal background like homepage */
-  color: white;
-  box-sizing: border-box;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.logo {
-  font-weight: 700;
-  font-size: 24px;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #004d40, #00695c);
+  padding: 12px 30px;
   color: #fff;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
+/* Logo button */
+.logo-btn {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.logo-btn:hover {
+  color: #ffca28;
+  transform: scale(1.05);
+}
+.logo-highlight {
+  color: #ffca28;
+}
+
+/* Navigation */
+.nav-links {
+  display: flex;
+  gap: 18px;
+  margin-left: 40px;
+  flex: 1;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #e0f7fa;
+  font-weight: 500;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.nav-links a:hover {
+  color: #ffca28;
+  transform: translateY(-2px);
+}
+
+/* Right actions */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .login-btn, .logout-btn {
-  background: white;
-  color: #00695c;
+  padding: 6px 14px;
   border: none;
-  padding: 8px 14px;
   border-radius: 6px;
+  font-size: 0.9rem;
   cursor: pointer;
   font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.login-btn:hover, .logout-btn:hover {
-  background: #f1f1f1;
+.login-btn {
+  background: #00796b;
+  color: #fff;
+}
+.login-btn:hover {
+  background: #004d40;
+  transform: scale(1.05);
 }
 
+.logout-btn {
+  background: #d32f2f;
+  color: #fff;
+}
+.logout-btn:hover {
+  background: #b71c1c;
+  transform: scale(1.05);
+}
+
+/* Profile link */
 .user-name {
-  margin-right: 10px;
-  color: white;
-  text-decoration: none;
+  color: #e0f7fa;
   font-weight: 500;
+  text-decoration: none;
+  margin-right: 10px;
+}
+.user-name:hover {
+  color: #ffca28;
 }
