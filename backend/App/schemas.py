@@ -32,15 +32,6 @@ class UserResponse(BaseModel):
     class Config:
         orm_mode = True
 
-    @classmethod
-    def from_orm(cls, user: "User"):
-        return cls(
-            id=user.id,
-            full_name=user.full_name,
-            email=decrypt(user.email_encrypted),
-            phone=decrypt(user.phone_encrypted),
-            role=user.role
-        )
 
 class UserLogin(BaseModel):
     identifier : str

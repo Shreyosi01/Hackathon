@@ -4,20 +4,18 @@ from passlib.context import CryptContext
 from .. import models, schemas
 from ..database import get_db
 from ..core.auth import generate_token
-from ..utils.security import hash_deterministic, decrypt_data  # ✅ updated
 
 router = APIRouter()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 @router.post("/login")
 def login(request: schemas.UserLogin, db: Session = Depends(get_db)):
-    # 🔒 use deterministic hash for search (not encryption)
-    identifier_hash = hash_deterministic(request.identifier)
+    identifier = request.identifier
 
     # search by hashed email/phone
     user = db.query(models.User).filter(
-        (models.User.email_hash == identifier_hash) |
-        (models.User.phone_hash == identifier_hash)
+        (models.User.email == identifier) |
+        (models.User.phone == identifier)
     ).first()
 
     if not user:
@@ -43,9 +41,9 @@ def login(request: schemas.UserLogin, db: Session = Depends(get_db)):
         "token_type": "bearer",
         "user": {
             "id": user.id,
-            "full_name": decrypt_data(user.full_name),  # decrypt for API response
-            "email": decrypt_data(user.email_encrypted),
-            "phone": decrypt_data(user.phone_encrypted),
+            "full_name": user.full_name,  # decrypt for API response
+            "email": user.email,
+            "phone": user.phone,
             "role": user.role
         }
     }
