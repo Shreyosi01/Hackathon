@@ -1,16 +1,44 @@
 .main-header {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between; /* ✅ Logo left, button right */
   align-items: center;
-  padding: 1.2rem 2vw 0.5rem 2vw;
-  background: transparent;
+  padding: 1rem 2rem;
+  background: #00695c; /* teal background like homepage */
+  color: white;
   box-sizing: border-box;
-  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-.header-title {
+
+.logo {
   font-weight: 700;
-  font-size: 22px;
-  color: #1e88a8;
-  margin-left: 8px;
+  font-size: 24px;
+  color: #fff;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-btn, .logout-btn {
+  background: white;
+  color: #00695c;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.login-btn:hover, .logout-btn:hover {
+  background: #f1f1f1;
+}
+
+.user-name {
+  margin-right: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
 }

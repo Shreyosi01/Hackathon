@@ -9,77 +9,10 @@ import {
   FaVideo,
   FaBullhorn,
 } from "react-icons/fa";
-import { isLoggedIn, getUser, logout } from "../services/auth"; // ✅ import auth utils
 
 export default function HomePage() {
-  const loggedIn = isLoggedIn();
-  const user = getUser();
-
-  // ✅ get profile path based on role
-  const profilePath =
-    user?.role === "doctor"
-      ? "/profile/doctor"
-      : user?.role === "ngo"
-      ? "/profile/ngo"
-      : "/profile/student"; // default to student
-
   return (
     <div className="homepage-root">
-      {/* Header */}
-      <header className="homepage-header">
-        <div className="logo">CareSync</div>
-        <nav className="nav-links">
-          <Link to="/">
-            <span role="img" aria-label="Home" style={{ marginRight: 4 }}>🏠</span>
-            Home
-          </Link>
-          <Link to="/find-doctors">
-            <FaUserMd style={{ marginRight: 4 }} />
-            Find Doctors
-          </Link>
-          <Link to="/video-consult">
-            <FaVideo style={{ marginRight: 4 }} />
-            Video Consult
-          </Link>
-          <Link to="/ai-chatbot">
-            <FaRobot style={{ marginRight: 4 }} />
-            AI Chatbot
-          </Link>
-          <Link to="/wellness-leaderboard">
-            <FaTrophy style={{ marginRight: 4 }} />
-            Wellness Leaderboard
-          </Link>
-          <Link to="/health-report">
-            <FaHeartbeat style={{ marginRight: 4 }} />
-            Health Reporting
-          </Link>
-          <Link to="/campaigns">
-            <FaBullhorn style={{ marginRight: 4 }} />
-            Campaigns
-          </Link>
-        </nav>
-        <div className="header-actions">
-          {loggedIn ? (
-            <div className="profile-actions">
-              {/* ✅ Profile is now a clickable link */}
-              <Link to={profilePath} className="user-name">
-                👤 {user?.full_name || "Profile"}
-              </Link>
-              <button className="logout-btn" onClick={logout}>
-                Logout
-              </button>
-            </div>
-          ) : (
-            <button
-              className="login-btn"
-              onClick={() => (window.location.href = "/login")}
-            >
-              Login / Signup
-            </button>
-          )}
-        </div>
-      </header>
-
       {/* Feature Cards / Widgets */}
       <div className="feature-cards-row">
         <Link to="/find-doctors" className="feature-card">

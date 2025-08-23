@@ -13,7 +13,7 @@ body {
 
 /* Location Button */
 .location-btn {
-  background: #14b8a6; /* teal-500 */
+  background: #6199e8; /* teal-500 */
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -99,7 +99,7 @@ body {
 
 /* Contact Button */
 .contact-button {
-  background: #14b8a6;
+  background: #4386ce;
   color: #fff;
   border: none;
   border-radius: 6px;
